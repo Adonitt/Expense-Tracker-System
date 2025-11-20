@@ -1,10 +1,10 @@
-package org.example.backend.services.implementations;
+package org.example.incomeandexpensebackend.services.implementations;
 
-import org.example.backend.dtos.transaction.CreateTransactionDto;
-import org.example.backend.dtos.transaction.TransactionDetailsDto;
-import org.example.backend.dtos.transaction.TransactionListingDto;
-import org.example.backend.dtos.transaction.UpdateTransactionDto;
-import org.example.backend.services.interfaces.TransactionService;
+import org.example.incomeandexpensebackend.dtos.transaction.CreateTransactionDto;
+import org.example.incomeandexpensebackend.dtos.transaction.TransactionDetailsDto;
+import org.example.incomeandexpensebackend.dtos.transaction.TransactionListingDto;
+import org.example.incomeandexpensebackend.dtos.transaction.UpdateTransactionDto;
+import org.example.incomeandexpensebackend.services.interfaces.TransactionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

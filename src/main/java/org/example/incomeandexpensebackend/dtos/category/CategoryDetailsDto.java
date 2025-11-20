@@ -1,9 +1,9 @@
-package org.example.backend.dtos.category;
+package org.example.incomeandexpensebackend.dtos.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.backend.enums.TransactionTypeEnum;
+import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package org.example.backend.services.implementations;
+package org.example.incomeandexpensebackend.services.implementations;
 
-import org.example.backend.dtos.user.CreateUserDto;
-import org.example.backend.dtos.user.UpdateUserDto;
-import org.example.backend.dtos.user.UserDetailsDto;
-import org.example.backend.dtos.user.UserListingDto;
-import org.example.backend.services.interfaces.UserService;
+import org.example.incomeandexpensebackend.dtos.user.CreateUserDto;
+import org.example.incomeandexpensebackend.dtos.user.UpdateUserDto;
+import org.example.incomeandexpensebackend.dtos.user.UserDetailsDto;
+import org.example.incomeandexpensebackend.dtos.user.UserListingDto;
+import org.example.incomeandexpensebackend.services.interfaces.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

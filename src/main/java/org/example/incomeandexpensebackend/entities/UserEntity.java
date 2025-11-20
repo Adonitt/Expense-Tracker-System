@@ -1,8 +1,8 @@
-package org.example.backend.entities;
+package org.example.incomeandexpensebackend.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.backend.enums.RoleEnum;
+import org.example.incomeandexpensebackend.enums.RoleEnum;
 
 import java.time.LocalDateTime;
 

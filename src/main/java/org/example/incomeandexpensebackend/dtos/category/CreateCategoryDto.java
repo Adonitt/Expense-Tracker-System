@@ -1,12 +1,10 @@
-package org.example.backend.dtos.category;
+package org.example.incomeandexpensebackend.dtos.category;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.backend.entities.TransactionEntity;
-import org.example.backend.entities.UserEntity;
-import org.example.backend.enums.TransactionTypeEnum;
+import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

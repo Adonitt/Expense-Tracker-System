@@ -1,8 +1,8 @@
-package org.example.backend.mappers;
+package org.example.incomeandexpensebackend.mappers;
 
-import org.example.backend.dtos.transaction.CreateTransactionDto;
-import org.example.backend.dtos.transaction.TransactionListingDto;
-import org.example.backend.entities.TransactionEntity;
+import org.example.incomeandexpensebackend.dtos.transaction.CreateTransactionDto;
+import org.example.incomeandexpensebackend.dtos.transaction.TransactionListingDto;
+import org.example.incomeandexpensebackend.entities.TransactionEntity;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Primary;
 

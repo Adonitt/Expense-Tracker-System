@@ -1,4 +1,4 @@
-package org.example.backend.dtos.user;
+package org.example.incomeandexpensebackend.dtos.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.backend.enums.RoleEnum;
+import org.example.incomeandexpensebackend.enums.RoleEnum;
 
 @Data
 @NoArgsConstructor

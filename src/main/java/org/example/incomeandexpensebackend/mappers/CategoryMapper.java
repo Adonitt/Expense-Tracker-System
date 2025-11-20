@@ -1,8 +1,8 @@
-package org.example.backend.mappers;
+package org.example.incomeandexpensebackend.mappers;
 
-import org.example.backend.dtos.category.CategoryDetailsDto;
-import org.example.backend.dtos.category.CreateCategoryDto;
-import org.example.backend.entities.CategoryEntity;
+import org.example.incomeandexpensebackend.dtos.category.CategoryDetailsDto;
+import org.example.incomeandexpensebackend.dtos.category.CreateCategoryDto;
+import org.example.incomeandexpensebackend.entities.CategoryEntity;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Primary;
 

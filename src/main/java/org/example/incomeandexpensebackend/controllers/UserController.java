@@ -1,4 +1,4 @@
-package org.example.backend.controllers;
+package org.example.incomeandexpensebackend.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 

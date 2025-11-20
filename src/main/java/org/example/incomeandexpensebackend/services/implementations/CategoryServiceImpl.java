@@ -1,10 +1,10 @@
-package org.example.backend.services.implementations;
+package org.example.incomeandexpensebackend.services.implementations;
 
 
-import org.example.backend.dtos.category.CategoryDetailsDto;
-import org.example.backend.dtos.category.CreateCategoryDto;
-import org.example.backend.dtos.category.UpdateCategoryDto;
-import org.example.backend.services.interfaces.CategoryService;
+import org.example.incomeandexpensebackend.dtos.category.CategoryDetailsDto;
+import org.example.incomeandexpensebackend.dtos.category.CreateCategoryDto;
+import org.example.incomeandexpensebackend.dtos.category.UpdateCategoryDto;
+import org.example.incomeandexpensebackend.services.interfaces.CategoryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package org.example.backend.repositories;
+package org.example.incomeandexpensebackend.repositories;
 
-import org.example.backend.entities.TransactionEntity;
+import org.example.incomeandexpensebackend.entities.TransactionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package org.example.backend.enums;
+package org.example.incomeandexpensebackend.enums;
 
 public enum TransactionTypeEnum {
     INCOME,

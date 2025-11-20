@@ -1,4 +1,4 @@
-package org.example.backend.config;
+package org.example.incomeandexpensebackend.config;
 
 import org.flywaydb.core.Flyway;
 

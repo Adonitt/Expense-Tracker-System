@@ -1,9 +1,10 @@
-package org.example.backend.services.interfaces;
+package org.example.incomeandexpensebackend.services.interfaces;
 
-import org.example.backend.dtos.category.CategoryDetailsDto;
-import org.example.backend.dtos.category.CreateCategoryDto;
-import org.example.backend.dtos.category.UpdateCategoryDto;
-import org.example.backend.services.base_services.*;
+
+import org.example.incomeandexpensebackend.dtos.category.CategoryDetailsDto;
+import org.example.incomeandexpensebackend.dtos.category.CreateCategoryDto;
+import org.example.incomeandexpensebackend.dtos.category.UpdateCategoryDto;
+import org.example.incomeandexpensebackend.services.base_services.*;
 
 public interface CategoryService extends Addable<CreateCategoryDto>,
         Modifiable<UpdateCategoryDto, Long>,

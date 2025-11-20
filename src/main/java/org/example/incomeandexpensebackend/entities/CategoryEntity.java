@@ -1,11 +1,11 @@
-package org.example.backend.entities;
+package org.example.incomeandexpensebackend.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.backend.enums.TransactionTypeEnum;
+import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

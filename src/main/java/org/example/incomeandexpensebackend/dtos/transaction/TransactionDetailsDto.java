@@ -1,9 +1,9 @@
-package org.example.backend.dtos.transaction;
+package org.example.incomeandexpensebackend.dtos.transaction;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.backend.enums.TransactionTypeEnum;
+import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

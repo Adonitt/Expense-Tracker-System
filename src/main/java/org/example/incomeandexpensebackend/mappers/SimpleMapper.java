@@ -1,4 +1,4 @@
-package org.example.backend.mappers;
+package org.example.incomeandexpensebackend.mappers;
 
 public interface SimpleMapper<TEntity, TDto> {
     TEntity toEntity(TDto dto);
