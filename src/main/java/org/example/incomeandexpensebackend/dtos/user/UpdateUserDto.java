@@ -36,5 +36,5 @@ public class UpdateUserDto {
 
     private RoleEnum role;
 
-    private boolean isActive;
+    private Boolean isActive;
 }

@@ -26,6 +26,6 @@ public class UserDetailsDto {
 
     private LocalDateTime registeredAt;
 
-    private boolean isActive = true;
+    private Boolean isActive ;
 
 }

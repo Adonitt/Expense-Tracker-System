@@ -8,9 +8,14 @@ import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
-@Primary
 @Mapper(componentModel = "spring")
-public interface TransactionMapper extends SimpleMapper<TransactionEntity, CreateTransactionDto> {
+public interface TransactionMapper {
+
+
+    TransactionEntity toEntity(CreateTransactionDto dto);
+
+    CreateTransactionDto toDto(TransactionEntity entity);
+
     List<TransactionEntity> toTransactionEntityList(List<TransactionListingDto> transactionListingDtos);
 
     List<TransactionListingDto> toTransactionListingDtoList(List<TransactionEntity> transactionEntities);

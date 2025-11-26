@@ -47,9 +47,9 @@ public class CreateUserDto {
 
     private RoleEnum role;
 
-    private LocalDateTime registeredAt = LocalDateTime.now();
+    private LocalDateTime registeredAt;
 
-    private boolean isActive = true;
+    private Boolean isActive;
 }
 
 

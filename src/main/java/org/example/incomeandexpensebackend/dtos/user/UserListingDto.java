@@ -16,5 +16,5 @@ public class UserListingDto {
 
     private String email;
 
-    private boolean isActive = true;
+    private Boolean isActive;
 }

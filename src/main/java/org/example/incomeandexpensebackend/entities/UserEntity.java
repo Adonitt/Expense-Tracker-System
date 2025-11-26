@@ -6,10 +6,10 @@ import org.example.incomeandexpensebackend.enums.RoleEnum;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "users")
 public class UserEntity {
     @Id
@@ -25,7 +25,7 @@ public class UserEntity {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "email",unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
@@ -39,5 +39,5 @@ public class UserEntity {
     private LocalDateTime registeredAt;
 
     @Column(name = "isActive")
-    private boolean isActive = true;
+    private Boolean isActive ;
 }

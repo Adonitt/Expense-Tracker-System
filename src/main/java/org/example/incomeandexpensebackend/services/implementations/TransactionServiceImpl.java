@@ -13,6 +13,7 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
     @Override
     public CreateTransactionDto create(CreateTransactionDto dto) {
+
         return null;
     }
 
@@ -32,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void removeById(Long id) {
 
     }
 }
