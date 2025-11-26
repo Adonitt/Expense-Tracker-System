@@ -3,6 +3,7 @@ package org.example.incomeandexpensebackend.controllers;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.incomeandexpensebackend.exceptions.EmailExistsException;
 import org.example.incomeandexpensebackend.exceptions.PasswordsDoNotMatchException;
+import org.example.incomeandexpensebackend.exceptions.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +25,11 @@ public class ErrorController {
     @ExceptionHandler(EmailExistsException.class)
     public ResponseEntity<String> handleEmailExists(EmailExistsException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<String> handleUnauthorized(UnauthorizedException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 
     @ExceptionHandler(PasswordsDoNotMatchException.class)

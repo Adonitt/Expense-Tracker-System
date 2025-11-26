@@ -1,6 +1,7 @@
 package org.example.incomeandexpensebackend.services.implementations;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.example.incomeandexpensebackend.dtos.user.CreateUserDto;
 import org.example.incomeandexpensebackend.dtos.user.UpdateUserDto;
 import org.example.incomeandexpensebackend.dtos.user.UserDetailsDto;
@@ -11,21 +12,19 @@ import org.example.incomeandexpensebackend.exceptions.PasswordsDoNotMatchExcepti
 import org.example.incomeandexpensebackend.mappers.UserMapper;
 import org.example.incomeandexpensebackend.repositories.UserRepository;
 import org.example.incomeandexpensebackend.services.interfaces.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-    }
 
     @Override
     public CreateUserDto create(CreateUserDto dto) {
@@ -35,12 +34,13 @@ public class UserServiceImpl implements UserService {
         }
 
         var existing = userRepository.findByEmail(dto.getEmail());
-
-        if (existing != null) {
+        if (existing.isPresent()) {
             throw new EmailExistsException("Email already exists");
         }
 
+
         var entity = userMapper.toEntity(dto);
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
         entity.setRole(RoleEnum.USER);
         entity.setRegisteredAt(LocalDateTime.now());
         entity.setIsActive(true);
@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
         var saved = userRepository.save(entity);
         return userMapper.toDto(saved);
     }
-
 
     @Override
     public List<UserListingDto> findAll() {
