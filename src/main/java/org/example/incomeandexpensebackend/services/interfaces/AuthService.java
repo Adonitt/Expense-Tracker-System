@@ -8,4 +8,6 @@ public interface AuthService {
     public AuthResponseDto login(LoginDto dto);
 
     UserEntity validateToken(String token);
+    String getLoggedInUserEmail();
+
 }

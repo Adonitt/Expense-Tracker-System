@@ -3,6 +3,7 @@ package org.example.incomeandexpensebackend.dtos.transaction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.incomeandexpensebackend.enums.CategoryEnum;
 import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.time.LocalDate;
@@ -14,11 +15,15 @@ import java.time.LocalDateTime;
 public class TransactionDetailsDto {
     private Long id;
 
-    private Long userId;
+    private CategoryEnum category;
 
-    private Long categoryId;
+    private Long debtId;
 
     private double amount;
+
+    private Long userId;
+
+    private String userFullName;
 
     private TransactionTypeEnum type;
 
@@ -29,4 +34,5 @@ public class TransactionDetailsDto {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
 }

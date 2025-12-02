@@ -1,22 +1,31 @@
 package org.example.incomeandexpensebackend.mappers;
 
 import org.example.incomeandexpensebackend.dtos.transaction.CreateTransactionDto;
+import org.example.incomeandexpensebackend.dtos.transaction.TransactionDetailsDto;
 import org.example.incomeandexpensebackend.dtos.transaction.TransactionListingDto;
+import org.example.incomeandexpensebackend.dtos.transaction.UpdateTransactionDto;
 import org.example.incomeandexpensebackend.entities.TransactionEntity;
 import org.mapstruct.Mapper;
-import org.springframework.context.annotation.Primary;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface TransactionMapper {
-
-
     TransactionEntity toEntity(CreateTransactionDto dto);
 
-    CreateTransactionDto toDto(TransactionEntity entity);
+    CreateTransactionDto toCreateDto(TransactionEntity entity);
 
-    List<TransactionEntity> toTransactionEntityList(List<TransactionListingDto> transactionListingDtos);
+    @Mapping(target = "userId", expression = "java(entity.getUser().getId())")
+    @Mapping(target = "debtId", expression = "java(entity.getDebt().getId())")
+    TransactionListingDto toTransactionListingDto(TransactionEntity entity);
 
     List<TransactionListingDto> toTransactionListingDtoList(List<TransactionEntity> transactionEntities);
+
+    @Mapping(target = "userId", expression = "java(entity.getUser().getId())")
+    @Mapping(target = "debtId", expression = "java(entity.getDebt().getId())")
+    @Mapping(target = "userFullName", expression = "java(entity.getUser().getFirstName() " + " + entity.getUser().getLastName())")
+    TransactionDetailsDto toTransactionDetailsDto(TransactionEntity entity);
+
+    UpdateTransactionDto toUpdateDto(TransactionEntity entity);
 }

@@ -1,6 +1,7 @@
 package org.example.incomeandexpensebackend.enums;
 
 public enum CategoryEnum {
+    DEBT,
     SALARY,
     FREELANCE,
     BUSINESS,

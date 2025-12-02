@@ -3,16 +3,29 @@ package org.example.incomeandexpensebackend.security;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Map;
 
 @Component
 public class JWTUtil {
-    private final Key secret = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private final long expiration = 86400000;
+    @Value("${jwt.secret}")
+    private String secretString;
+
+    @Value("${jwt.expiration}")
+    private long expiration;
+
+    private SecretKey secret;
+
+    @PostConstruct
+    public void init() {
+        secret = Keys.hmacShaKeyFor(secretString.getBytes(StandardCharsets.UTF_8));
+    }
 
     public String generateToken(String email, String name, String surname) {
         return Jwts.builder()

@@ -1,6 +1,7 @@
 package org.example.incomeandexpensebackend.controllers;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.example.incomeandexpensebackend.exceptions.DebtTransactionException;
 import org.example.incomeandexpensebackend.exceptions.EmailExistsException;
 import org.example.incomeandexpensebackend.exceptions.PasswordsDoNotMatchException;
 import org.example.incomeandexpensebackend.exceptions.UnauthorizedException;
@@ -34,6 +35,11 @@ public class ErrorController {
 
     @ExceptionHandler(PasswordsDoNotMatchException.class)
     public ResponseEntity<String> handlePasswordsDoNotMatch(PasswordsDoNotMatchException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(DebtTransactionException.class)
+    public ResponseEntity<String> handleDebtTransactionException(DebtTransactionException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }

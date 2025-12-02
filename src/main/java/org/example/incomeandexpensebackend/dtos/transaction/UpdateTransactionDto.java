@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.incomeandexpensebackend.enums.CategoryEnum;
 import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class UpdateTransactionDto {
 
     private TransactionTypeEnum type;
 
-    private Long categoryId;
+    private CategoryEnum category;
 
     @NotNull(message = "Description is required")
     @NotBlank(message = "Description is required")

@@ -47,4 +47,8 @@ public class TransactionEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "debt_id")
+    private DebtEntity debt;
 }

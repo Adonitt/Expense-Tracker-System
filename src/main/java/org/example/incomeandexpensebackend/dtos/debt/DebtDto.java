@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.incomeandexpensebackend.entities.TransactionEntity;
 import org.example.incomeandexpensebackend.enums.DebtStatus;
 import org.example.incomeandexpensebackend.enums.DebtTypeEnum;
 
@@ -18,7 +19,7 @@ public class DebtDto {
 
     @NotNull(message = "Amount cannot be null")
     @Min(value = 0, message = "Amount cannot be negative")
-    private String amount;
+    private double amount;
 
     @NotNull(message = "Person cannot be null")
     @NotBlank(message = "Person cannot be blank")
@@ -38,5 +39,10 @@ public class DebtDto {
     @PastOrPresent(message = "Date must be in the past or present")
     private LocalDate date;
 
+    private Long transactionId;
+
+
     private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

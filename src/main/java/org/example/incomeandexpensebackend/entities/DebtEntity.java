@@ -22,7 +22,7 @@ public class DebtEntity {
     private Long id;
 
     @Column(name = "amount")
-    private String amount;
+    private double amount;
 
     @Column(name = "person")
     private String person;
@@ -43,4 +43,11 @@ public class DebtEntity {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @OneToOne(mappedBy = "debt", cascade = CascadeType.ALL)
+    private TransactionEntity transaction;
+
 }

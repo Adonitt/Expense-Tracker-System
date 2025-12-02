@@ -1,6 +1,7 @@
 package org.example.incomeandexpensebackend.services.implementations;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.example.incomeandexpensebackend.dtos.auth.AuthResponseDto;
 import org.example.incomeandexpensebackend.dtos.auth.LoginDto;
@@ -18,6 +19,8 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final JWTUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
+    private final HttpServletRequest httpServletRequest;
+
 
     @Override
     public AuthResponseDto login(LoginDto dto) {
@@ -37,4 +40,18 @@ public class AuthServiceImpl implements AuthService {
         String email = jwtUtil.validateTokenAndGetEmail(token);
         return userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
+
+    @Override
+    public String getLoggedInUserEmail() {
+        String authHeader = httpServletRequest.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new UnauthorizedException("Missing or invalid Authorization header");
+        }
+
+        String token = authHeader.substring(7);
+
+        return jwtUtil.validateTokenAndGetEmail(token);
+    }
+
 }

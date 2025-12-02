@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.incomeandexpensebackend.enums.CategoryEnum;
 import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
 
 import java.time.LocalDate;
@@ -15,9 +16,7 @@ import java.time.LocalDateTime;
 public class CreateTransactionDto {
     private Long id;
 
-    private Long userId;
-
-    private Long categoryId;
+    private CategoryEnum category;
 
     @NotNull(message = "Amount is required")
     @Min(value = 0, message = "Amount must be greater than or equal to 0")
@@ -35,4 +34,5 @@ public class CreateTransactionDto {
     private LocalDate date;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
 }
