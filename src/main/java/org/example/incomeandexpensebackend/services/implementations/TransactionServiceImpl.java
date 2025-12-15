@@ -9,7 +9,9 @@ import org.example.incomeandexpensebackend.dtos.transaction.UpdateTransactionDto
 import org.example.incomeandexpensebackend.entities.TransactionEntity;
 import org.example.incomeandexpensebackend.entities.UserEntity;
 import org.example.incomeandexpensebackend.enums.CategoryEnum;
+import org.example.incomeandexpensebackend.enums.RoleEnum;
 import org.example.incomeandexpensebackend.exceptions.DebtTransactionException;
+import org.example.incomeandexpensebackend.exceptions.UnauthorizedException;
 import org.example.incomeandexpensebackend.mappers.TransactionMapper;
 import org.example.incomeandexpensebackend.repositories.TransactionRepository;
 import org.example.incomeandexpensebackend.repositories.UserRepository;
@@ -43,15 +45,38 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<TransactionListingDto> findAll() {
-        var transactionsList = transactionRepository.findAll();
+
+        String email = authService.getLoggedInUserEmail();
+        UserEntity loggedInUser = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        List<TransactionEntity> transactionsList;
+
+        if (loggedInUser.getRole().equals(RoleEnum.ADMIN)) {
+            transactionsList = transactionRepository.findAll();
+        } else {
+            transactionsList = transactionRepository.findByUserId(loggedInUser.getId());
+        }
+
         return mapper.toTransactionListingDtoList(transactionsList);
     }
 
     @Override
     public TransactionDetailsDto findById(Long id) {
-        var transaction = transactionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Transaction not found"));
+        var transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Transaction not found"));
+
+        String email = authService.getLoggedInUserEmail();
+        UserEntity loggedInUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        if (loggedInUser.getRole() != RoleEnum.ADMIN &&
+                !transaction.getUser().getId().equals(loggedInUser.getId())) {
+            throw new UnauthorizedException("You are not allowed to access this transaction");
+        }
+
         return mapper.toTransactionDetailsDto(transaction);
     }
+
 
     @Override
     public UpdateTransactionDto update(Long id, UpdateTransactionDto dto) {

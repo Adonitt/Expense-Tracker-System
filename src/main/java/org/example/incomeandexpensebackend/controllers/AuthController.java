@@ -3,7 +3,9 @@ package org.example.incomeandexpensebackend.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.incomeandexpensebackend.dtos.auth.AuthResponseDto;
 import org.example.incomeandexpensebackend.dtos.auth.LoginDto;
+import org.example.incomeandexpensebackend.dtos.user.CreateUserDto;
 import org.example.incomeandexpensebackend.services.interfaces.AuthService;
+import org.example.incomeandexpensebackend.services.interfaces.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
+    private final UserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
@@ -22,4 +25,9 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+
+    @PostMapping("/register")
+    public ResponseEntity<CreateUserDto> register(@RequestBody CreateUserDto createUserDto) {
+        return ResponseEntity.ok(userService.create(createUserDto));
+    }
 }

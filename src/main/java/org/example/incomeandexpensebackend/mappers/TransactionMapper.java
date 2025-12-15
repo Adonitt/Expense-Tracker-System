@@ -17,14 +17,14 @@ public interface TransactionMapper {
     CreateTransactionDto toCreateDto(TransactionEntity entity);
 
     @Mapping(target = "userId", expression = "java(entity.getUser().getId())")
-    @Mapping(target = "debtId", expression = "java(entity.getDebt().getId())")
+    @Mapping(target = "debtId", expression = "java(entity.getDebt() != null ? entity.getDebt().getId() : null)")
     TransactionListingDto toTransactionListingDto(TransactionEntity entity);
 
     List<TransactionListingDto> toTransactionListingDtoList(List<TransactionEntity> transactionEntities);
 
     @Mapping(target = "userId", expression = "java(entity.getUser().getId())")
-    @Mapping(target = "debtId", expression = "java(entity.getDebt().getId())")
-    @Mapping(target = "userFullName", expression = "java(entity.getUser().getFirstName() " + " + entity.getUser().getLastName())")
+    @Mapping(target = "debtId", expression = "java(entity.getDebt()!= null ? entity.getDebt().getId() : null)")
+    @Mapping(target = "userFullName", expression = "java(entity.getUser().getFirstName() + \" \" + entity.getUser().getLastName())")
     TransactionDetailsDto toTransactionDetailsDto(TransactionEntity entity);
 
     UpdateTransactionDto toUpdateDto(TransactionEntity entity);

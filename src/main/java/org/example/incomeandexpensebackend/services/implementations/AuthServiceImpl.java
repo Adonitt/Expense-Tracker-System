@@ -7,6 +7,7 @@ import org.example.incomeandexpensebackend.dtos.auth.AuthResponseDto;
 import org.example.incomeandexpensebackend.dtos.auth.LoginDto;
 import org.example.incomeandexpensebackend.entities.UserEntity;
 import org.example.incomeandexpensebackend.exceptions.UnauthorizedException;
+import org.example.incomeandexpensebackend.exceptions.UserNotFoundException;
 import org.example.incomeandexpensebackend.repositories.UserRepository;
 import org.example.incomeandexpensebackend.security.JWTUtil;
 import org.example.incomeandexpensebackend.services.interfaces.AuthService;
@@ -24,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponseDto login(LoginDto dto) {
-        UserEntity user = userRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new UnauthorizedException("Invalid email or password"));
+        UserEntity user = userRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new UserNotFoundException("User with this email doesn't exist!"));
 
         if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new UnauthorizedException("Invalid email or password");

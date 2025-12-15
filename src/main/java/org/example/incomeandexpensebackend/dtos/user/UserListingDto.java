@@ -3,6 +3,7 @@ package org.example.incomeandexpensebackend.dtos.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.incomeandexpensebackend.enums.RoleEnum;
 
 @Data
 @AllArgsConstructor
@@ -17,4 +18,7 @@ public class UserListingDto {
     private String email;
 
     private Boolean isActive;
+
+    private RoleEnum role;
+
 }

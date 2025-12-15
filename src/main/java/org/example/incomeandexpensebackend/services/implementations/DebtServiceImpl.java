@@ -4,12 +4,11 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.incomeandexpensebackend.dtos.debt.DebtDto;
+import org.example.incomeandexpensebackend.entities.DebtEntity;
 import org.example.incomeandexpensebackend.entities.TransactionEntity;
 import org.example.incomeandexpensebackend.entities.UserEntity;
-import org.example.incomeandexpensebackend.enums.CategoryEnum;
-import org.example.incomeandexpensebackend.enums.DebtStatus;
-import org.example.incomeandexpensebackend.enums.DebtTypeEnum;
-import org.example.incomeandexpensebackend.enums.TransactionTypeEnum;
+import org.example.incomeandexpensebackend.enums.*;
+import org.example.incomeandexpensebackend.exceptions.UnauthorizedException;
 import org.example.incomeandexpensebackend.mappers.DebtMapper;
 import org.example.incomeandexpensebackend.repositories.DebtRepository;
 import org.example.incomeandexpensebackend.repositories.TransactionRepository;
@@ -67,13 +66,31 @@ public class DebtServiceImpl implements DebtService {
 
     @Override
     public List<DebtDto> findAll() {
-        var debtsList = debtRepository.findAll();
-        return debtMapper.toDtoList(debtsList);
+        String email = authService.getLoggedInUserEmail();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User doesn't exists!"));
+
+        List<DebtEntity> debtEntityList;
+
+        if (user.getRole() == RoleEnum.ADMIN) {
+            debtEntityList = debtRepository.findAll();
+        } else {
+            debtEntityList = debtRepository.findByTransactionUserId(user.getId());
+        }
+
+        return debtMapper.toDtoList(debtEntityList);
     }
 
     @Override
     public DebtDto findById(Long id) {
         var debt = debtRepository.findById(id).orElseThrow(() -> new RuntimeException("Debt not found"));
+
+        String email = authService.getLoggedInUserEmail();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getRole() != RoleEnum.ADMIN && !debt.getTransaction().getUser().getId().equals(user.getId())) {
+            throw new UnauthorizedException("You are not allowed to access this debt");
+        }
+
         return debtMapper.toDto(debt);
     }
 

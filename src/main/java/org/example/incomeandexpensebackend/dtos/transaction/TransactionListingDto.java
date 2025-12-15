@@ -14,6 +14,8 @@ import java.time.LocalDate;
 public class TransactionListingDto {
     private Long id;
 
+    private Long debtId;
+
     private Long userId;
 
     private double amount;
@@ -23,7 +25,4 @@ public class TransactionListingDto {
     private LocalDate date;
 
     private CategoryEnum category;
-
-    private Long debtId;
-
 }

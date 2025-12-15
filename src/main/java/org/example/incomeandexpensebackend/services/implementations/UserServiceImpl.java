@@ -1,6 +1,7 @@
 package org.example.incomeandexpensebackend.services.implementations;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.incomeandexpensebackend.dtos.user.CreateUserDto;
 import org.example.incomeandexpensebackend.dtos.user.UpdateUserDto;
@@ -10,6 +11,7 @@ import org.example.incomeandexpensebackend.enums.RoleEnum;
 import org.example.incomeandexpensebackend.exceptions.EmailExistsException;
 import org.example.incomeandexpensebackend.exceptions.PasswordsDoNotMatchException;
 import org.example.incomeandexpensebackend.mappers.UserMapper;
+import org.example.incomeandexpensebackend.repositories.TransactionRepository;
 import org.example.incomeandexpensebackend.repositories.UserRepository;
 import org.example.incomeandexpensebackend.services.interfaces.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
-
+    private final TransactionRepository transactionRepository;
 
     @Override
     public CreateUserDto create(CreateUserDto dto) {
@@ -76,9 +78,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUpdateUserDto(updatedUser);
     }
 
+    @Transactional
     @Override
     public void removeById(Long id) {
         findById(id);
+        transactionRepository.deleteByUserId(id);
         userRepository.deleteById(id);
     }
 }
